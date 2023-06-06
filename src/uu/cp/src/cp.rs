@@ -106,7 +106,7 @@ impl UError for Error {
         EXIT_ERR
     }
 }
-
+// type 关键字用来定义一个类型别名
 pub type CopyResult<T> = Result<T, Error>;
 pub type Source = PathBuf;
 pub type SourceSlice = Path;
@@ -114,6 +114,7 @@ pub type Target = PathBuf;
 pub type TargetSlice = Path;
 
 /// Specifies whether when overwrite files
+/// 它允许你自动为某个类型实现一些 trait。这个属性应用到一个 struct 或 enum 类型定义之前。这里列出的每个 trait 都会被自动实现。
 #[derive(Clone, Copy, Eq, PartialEq)]
 pub enum ClobberMode {
     Force,
@@ -162,6 +163,7 @@ pub enum CopyMode {
     AttrOnly,
 }
 
+//Debug trait 是用于生成数据结构的格式化字符串表示，通常用于调试输出。 let p = Point { x: 10, y: 20 };println!("{:?}", p);
 #[derive(Debug)]
 pub struct Attributes {
     #[cfg(unix)]
@@ -172,7 +174,7 @@ pub struct Attributes {
     links: Preserve,
     xattr: Preserve,
 }
-
+//max方法根据一定的规则比较两个Attributes实例的字段值，并选择较大的值进行更新。这个方法在结构体的实例之间进行字段值的最大化比较，以确保当前实例的字段值始终保持较大的那个。
 impl Attributes {
     pub(crate) fn max(&mut self, other: Self) {
         #[cfg(unix)]
